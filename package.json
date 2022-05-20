@@ -18,5 +18,12 @@
   "homepage": "https://github.com/kaneran/mkwii-time-tracker-e2e-tests#readme",
   "devDependencies": {
     "cypress": "^9.6.1"
+  },
+  "dependencies": {
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "neat-csv": "^7.0.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
