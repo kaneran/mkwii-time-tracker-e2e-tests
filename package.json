@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cypress open"
+    "start": "cypress open",
+    "dev": "cypress run --spec \"cypress/integration/*.feature\""
   },
   "repository": {
     "type": "git",
