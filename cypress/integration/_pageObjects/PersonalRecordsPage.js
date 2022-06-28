@@ -6,7 +6,7 @@ class PersonalRecordsPage {
     return cy.get('[data-cy="track-link"]');
   }
   visit() {
-    cy.visit("/PRs");
+    cy.visit("");
   }
 }
 

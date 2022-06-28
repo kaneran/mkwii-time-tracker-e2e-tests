@@ -23,6 +23,14 @@ class AddTimePage {
     return cy.get('[data-cy="time-upload-error-message"]');
   }
 
+  get homeButton() {
+    return cy.get('[data-cy="home-nav-button"]');
+  }
+
+  getTrackLink(name){
+    return cy.get(`[data-cy="track-link-${name.toLowerCase().replace(' ', '-')}"]`)
+  }
+
   visit() {
     return cy.visit("/add");
   }
@@ -30,6 +38,7 @@ class AddTimePage {
   selectTrack(option) {
     this.formFields.eq(0).click();
     cy.get("span").filter(`:contains("${option}")`).click();
+    cy.wrap(option).as('track');
   }
 
   selectFormat(option) {
@@ -54,6 +63,7 @@ class AddTimePage {
     switch (outcome) {
       case "success":
         this.successMessage.should("be.visible");
+        this.verifyTimeAdded();
         break;
       case "error":
         this.errorMessage.should("be.visible");
@@ -61,6 +71,13 @@ class AddTimePage {
       default:
         break;
     }
+  }
+
+  verifyTimeAdded(){
+    this.homeButton.click();
+    cy.get('@track').then((track) => {
+      this.getTrackLink(track).click();
+    })
   }
 }
 
