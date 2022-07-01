@@ -1,12 +1,20 @@
 class PersonalRecordsPage {
   get downloadButton() {
-    return cy.get('[data-cy="download-csv-button"]');
+    return cy.get('button').filter(':contains("Download times")');
   }
-  get trackLinks() {
-    return cy.get('[data-cy="track-link"]');
+
+  getTrackLink(name) {
+    return cy.get(`[data-cy="track-link-${name.toLowerCase().replace(' ', '-')}"]`);
   }
+
   visit() {
-    cy.visit("");
+    cy.visit("").then(() => this.getTrackLink('DS Delfino Square').should('be.visible'));
+  }
+
+  viewTrackTimes(){
+    cy.get('@track').then((track) => {
+      this.getTrackLink(track).click();
+    });
   }
 }
 

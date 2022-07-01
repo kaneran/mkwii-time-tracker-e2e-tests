@@ -23,5 +23,7 @@ export const generateRandomTime = () => {
   const minute = faker.datatype.number({min: 0, max: 2});
   const second = faker.datatype.number({min: 10, max: 59});
   const millisecond = faker.datatype.number({ min: 100, max: 999 });
-  return `0${minute}:${second}.${millisecond}`;
+  const time = `0${minute}:${second}.${millisecond}`;
+  cy.wrap(time).as('time');
+  return time;
 }

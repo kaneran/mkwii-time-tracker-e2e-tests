@@ -24,6 +24,6 @@ And("submits the data", () => {
   AddTimePage.submitButton.click();
 });
 
-Then(/^the outcome should be (.*)$/, (outcome) => {
-  AddTimePage.verifyOutcome(outcome);
+Then(/^the outcome for the (.*) should be (.*)$/, (format,outcome) => {
+  AddTimePage.verifyOutcome(format, outcome);
 });

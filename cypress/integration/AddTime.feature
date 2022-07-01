@@ -4,7 +4,7 @@ Feature: Add time
         When the user selects <track> and <format>
         And enters a <time> time
         And submits the data
-        Then the outcome should be <outcome>
+        Then the outcome for the <format> should be <outcome>
 
         Examples:
             | track               | format       | time    | outcome |

@@ -1,3 +1,5 @@
+import PersonalRecordsPage from './PersonalRecordsPage';
+import TrackTimesPage from './TrackTimesPage';
 class AddTimePage {
   get formFields() {
     return cy.get('[data-cy="add-time-form"] .field');
@@ -27,57 +29,49 @@ class AddTimePage {
     return cy.get('[data-cy="home-nav-button"]');
   }
 
-  getTrackLink(name){
-    return cy.get(`[data-cy="track-link-${name.toLowerCase().replace(' ', '-')}"]`)
-  }
-
   visit() {
-    return cy.visit("/add");
+    return cy.visit('/add');
   }
 
   selectTrack(option) {
     this.formFields.eq(0).click();
-    cy.get("span").filter(`:contains("${option}")`).click();
+    cy.get('span').filter(`:contains("${option}")`).click();
     cy.wrap(option).as('track');
   }
 
   selectFormat(option) {
     this.formFields.eq(1).click();
-    cy.get("span").each((dropdownOption) => {
-      dropdownOption.text().toLowerCase() === option &&
-        dropdownOption.trigger("click");
+    cy.get('span').each((dropdownOption) => {
+      dropdownOption.text().toLowerCase() === option && dropdownOption.trigger('click');
     });
-    option === "shortcut" && this.updateShortcutBreakdown();
+    option === 'shortcut' && this.updateShortcutBreakdown();
   }
 
   updateShortcutBreakdown() {
-    this.shortcutBreakdownCheckboxes
-      .should("have.length.gt", 1)
-      .each((checkbox, index) => {
-        //Have to force click as the Form.field element has class 'hidden'
-        index % 2 > 0 && cy.wrap(checkbox).click({ force: true });
-      });
+    this.shortcutBreakdownCheckboxes.should('have.length.gt', 1).each((checkbox, index) => {
+      //Have to force click as the Form.field element has class 'hidden'
+      index % 2 > 0 && cy.wrap(checkbox).click({ force: true });
+    });
   }
 
-  verifyOutcome(outcome) {
+  verifyOutcome(format, outcome) {
     switch (outcome) {
-      case "success":
-        this.successMessage.should("be.visible");
-        this.verifyTimeAdded();
+      case 'success':
+        this.successMessage.should('be.visible');
+        this.verifyTimeAdded(format);
         break;
-      case "error":
-        this.errorMessage.should("be.visible");
+      case 'error':
+        this.errorMessage.should('be.visible');
         break;
       default:
         break;
     }
   }
 
-  verifyTimeAdded(){
+  verifyTimeAdded(format) {
     this.homeButton.click();
-    cy.get('@track').then((track) => {
-      this.getTrackLink(track).click();
-    })
+    PersonalRecordsPage.viewTrackTimes();
+    TrackTimesPage.verifyTimeAdded(format)
   }
 }
 
