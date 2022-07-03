@@ -11,9 +11,13 @@ class PersonalRecordsPage {
     cy.visit("").then(() => this.getTrackLink('DS Delfino Square').should('be.visible'));
   }
 
+  selectTrack(track){
+    this.getTrackLink(track).click();
+  }
+
   viewTrackTimes(){
     cy.get('@track').then((track) => {
-      this.getTrackLink(track).click();
+      this.selectTrack(track);
     });
   }
 }

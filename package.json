@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kaneran/mkwii-time-tracker-e2e-tests#readme",
   "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
     "cypress": "^9.6.1"
   },
   "dependencies": {
