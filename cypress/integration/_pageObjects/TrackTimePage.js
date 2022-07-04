@@ -24,7 +24,7 @@ class TrackTimePage {
   }
 
   deleteTrackTime() {
-    cy.intercept('PUT', '/times/delete/*').as('delete');
+    cy.intercept('PATCH', '/times/delete/*').as('delete');
     TrackTimesPage.trackTimes
       .eq(0)
       .find('a')

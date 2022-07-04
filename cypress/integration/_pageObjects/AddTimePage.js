@@ -10,7 +10,7 @@ class AddTimePage {
   }
 
   get timeInput() {
-    return cy.get('input[placeholder="Enter time in format MM:SS:mmm"]');
+    return cy.get('input[placeholder="Enter time in format MM:SS.mmm"]');
   }
 
   get submitButton() {

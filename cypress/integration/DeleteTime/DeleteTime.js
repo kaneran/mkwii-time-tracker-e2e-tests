@@ -15,7 +15,7 @@ Then('the time should be deleted', () => {
 });
 
 And('the user undos the deleted time', () => {
-  cy.intercept('PUT', '/times/undo/*').as('undo');
+  cy.intercept('PATCH', '/times/undo/*').as('undo');
   TrackTimePage.undoDeleteButton.click().wait('@undo').its('response.statusCode').should('equal', 200);
 });
 
